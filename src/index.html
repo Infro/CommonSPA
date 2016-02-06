@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlElement">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title data-bind="text: currentRoute().title"></title>
+    <!-- build:css -->
+	  <link href="bower_modules/toastr/toastr.css" rel="stylesheet">
+	  <link href="bower_modules/chosen/chosen.min.css" rel="stylesheet">
+      <link href="bower_modules/components-bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/styles.css" rel="stylesheet">
+    <!-- endbuild -->
+    <!-- build:js -->
+      <script src="app/require.config.js"></script>
+      <script data-main="app/startup" src="bower_modules/requirejs/require.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <div id="nav-bar" data-bind="component: { name: 'nav-bar', params: {currentRoute: currentRoute} }"></div>
+	<div id="page" class="container" data-bind="component: { name: currentRoute().component, params: currentRoute }"></div>
+    <div id="preload" style="display:none" data-bind="component: { name: preloadRoute().component, params: preloadRoute }"></div>
+  </body>
+</html>

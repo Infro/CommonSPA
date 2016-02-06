@@ -1,0 +1,33 @@
+{
+  "name": "Base",
+  "version": "1.0.0",
+  "authors": [
+    "Infro <infro.j.z@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bower-knockout-mapping": "~2.5.0",
+    "crossroads": "~0.12.0",
+    "components-bootstrap": "~3.3.6",
+    "jquery-validation": "1.14.0",
+    "hasher": "~1.2.0",
+    "knockout-projections": "~1.1.0-pre",
+    "knockout": "~3.4.0",
+    "requirejs-text": "~2.0.10",
+    "requirejs": "~2.1.11",
+    "rxjs": "~4.0.7",
+    "toastr": "2.1.2",
+    "underscore.string": "~3.2.3",
+    "underscore": "~1.8.3",
+    "chosen": "^1.4.2",
+    "knockout-dragdrop": "^2.4.4"
+  },
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "resolutions": {
+    "knockout": ">=2.2.0"
+  }
+}
