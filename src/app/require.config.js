@@ -8,10 +8,11 @@ var require = {
 		"crossroads": "bower_modules/crossroads/dist/crossroads",
 		"hasher": "bower_modules/hasher/dist/js/hasher",
 		"jquery": "bower_modules/jquery/dist/jquery",
-		"jquery.validate":  "bower_modules/jquery-validation/dist/jquery.validate",
+		// "jquery.validate":  "bower_modules/jquery-validation/dist/jquery.validate",
 		"knockout": "bower_modules/knockout/dist/knockout.debug",
-		"knockout-projections": "bower_modules/knockout-projections/dist/knockout-projections",
 		"knockout-mapping" : "bower_modules/bower-knockout-mapping/dist/knockout.mapping",
+		"knockout-projections": "bower_modules/knockout-projections/dist/knockout-projections",
+		"knockout-validation" : "bower_modules/knockout-validation/dist/knockout.validation",
 		//https://github.com/millermedeiros/js-signals/wiki/Examples
 		"signals": "bower_modules/js-signals/dist/signals.min",
 		"text": "bower_modules/requirejs-text/text",

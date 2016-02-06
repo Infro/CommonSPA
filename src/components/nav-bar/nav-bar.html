@@ -12,7 +12,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#" data-bind="css: { active: isActive(sitemap.pages[0].url) }">Heilman Consulting</a>
+			<a class="navbar-brand" href="#/" data-bind="css: { active: isActive(sitemap.pages[0].url) }, preload: $element.href">Heilman Consulting</a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav" data-bind="foreach: sitemap.pages">
