@@ -9,7 +9,7 @@ define([
 function($, ko, homeTemplate, preload, base, toastr) {
 	function HomeViewModel() {
 		base.call(this);
-		this.userSuggestion = ko.observable().extend({
+		this.userSuggestion = ko.observable('').extend({
 			required: true,
 			minLength: 8,
 			maxLength: 4096

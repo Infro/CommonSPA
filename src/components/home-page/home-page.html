@@ -3,16 +3,28 @@
 		Home Page Info Here.
 	</div>
 </div>
-<form method="post" action="api/addSuggestion" data-bind="submit: saveUserSuggestion">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="form-group">
-				<textarea data-bind='value: userSuggestion' class="form-control"
-					placeholder="Leave any suggestions you have here."></textarea>
-			</div>
-			<div class="form-group">
-				<input type="submit" data-bind="click: doSubmit" value="Submit" class="btn btn-primary" formnovalidate></input>
-			</div>
+<form method="post" action="api/addSuggestion" data-bind="submit: saveUserSuggestion" class="row">
+	<div class="col-md-12">
+		<div class="form-group has-feedback"
+			data-bind="css: {
+				'has-warning': userSuggestion.isModified() && !userSuggestion.isValid(),
+				'has-success': userSuggestion.isModified() && userSuggestion.isValid()
+			}">
+			<textarea id="suggestionBox" placeholder="Leave any suggestions you have here." class="form-control" style="resize: vertical; min-height: 100px;"
+				data-bind="value: userSuggestion,
+					popover: userSuggestion.isModified() ?
+						{ content: userSuggestion.error(), trigger: 'focus', placement: 'top' } :
+						{ trigger: 'none' }" ></textarea>
+			<div
+				data-bind="
+					attr: { 'data-delete': userSuggestion() }" ></div>
+			<span class="glyphicon form-control-feedback"
+				data-bind="css: { 'glyphicon-warning-sign': userSuggestion.isModified() && !userSuggestion.isValid(), 'glyphicon-ok': userSuggestion.isModified() && userSuggestion.isValid() }">
+			</span>
+		</div>
+		<!-- <div data-bind="text: userSuggestion.isModified"></div> -->
+		<div class="form-group">
+			<input type="submit" data-bind="click: doSubmit" value="Submit" class="btn btn-primary" formnovalidate></input>
 		</div>
 	</div>
 </form>
