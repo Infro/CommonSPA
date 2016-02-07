@@ -1,6 +1,7 @@
 define(['jquery', 'knockout', 'underscore', 'toastr'], function($, ko, _, toastr) {
 	function BaseComponent() {
 		this.validation = ko.observable();
+		this.isSaving = ko.observable(false);
 	}
 	
 	// ToDo: Very Low Priority: Extract into extension of its own as iSaveable that inherits from other classes so it can be chained and overridden.
@@ -52,8 +53,12 @@ define(['jquery', 'knockout', 'underscore', 'toastr'], function($, ko, _, toastr
 				},
 				error: function() {
 					toastr['error'](options.errorMessage);
+				},
+				completed: function() {
+					this.isSaving(false);
 				}
 			});
+			this.isSaving(true);
 			$.post(options);
 		}
 		else if(options.validationMessage) {

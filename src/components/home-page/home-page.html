@@ -15,9 +15,6 @@
 					popover: userSuggestion.isModified() ?
 						{ content: userSuggestion.error(), trigger: 'focus', placement: 'top' } :
 						{ trigger: 'none' }" ></textarea>
-			<div
-				data-bind="
-					attr: { 'data-delete': userSuggestion() }" ></div>
 			<span class="glyphicon form-control-feedback"
 				data-bind="css: { 'glyphicon-warning-sign': userSuggestion.isModified() && !userSuggestion.isValid(), 'glyphicon-ok': userSuggestion.isModified() && userSuggestion.isValid() }">
 			</span>
