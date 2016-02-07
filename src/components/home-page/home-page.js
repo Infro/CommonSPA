@@ -9,11 +9,13 @@ define([
 function($, ko, homeTemplate, preload, base, toastr) {
 	function HomeViewModel() {
 		base.call(this);
-		this.userSuggestion = ko.observable().extend({
+		this.userSuggestion = ko.observable('').extend({
 			required: true,
 			minLength: 8,
 			maxLength: 4096
 		});
+		var counter = 0;
+		this.userSuggestion.error.subscribe(function() {counter = counter + 1; alert(counter);});
 	}
 	
 	HomeViewModel.prototype = Object.create(base.prototype);
