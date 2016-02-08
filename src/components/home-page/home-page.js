@@ -14,8 +14,6 @@ function($, ko, homeTemplate, preload, base, toastr) {
 			minLength: 8,
 			maxLength: 4096
 		});
-		var counter = 0;
-		this.userSuggestion.error.subscribe(function() {counter = counter + 1; alert(counter);});
 	}
 	
 	HomeViewModel.prototype = Object.create(base.prototype);

@@ -14,6 +14,7 @@ var require = {
 		"knockout-projections": "bower_modules/knockout-projections/dist/knockout-projections",
 		"knockout-validation" : "bower_modules/knockout-validation/dist/knockout.validation",
 		'knockstrap': 'bower_modules/knockstrap/build/knockstrap',
+		'knockout-dragdrop': 'bower_modules/knockout-dragdrop/lib/knockout.dragdrop',
 		//https://github.com/millermedeiros/js-signals/wiki/Examples
 		"signals": "bower_modules/js-signals/dist/signals.min",
 		"text": "bower_modules/requirejs-text/text",
