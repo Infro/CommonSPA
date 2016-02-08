@@ -19,7 +19,6 @@
 				data-bind="css: { 'glyphicon-warning-sign': userSuggestion.isModified() && !userSuggestion.isValid(), 'glyphicon-ok': userSuggestion.isModified() && userSuggestion.isValid() }">
 			</span>
 		</div>
-		<!-- <div data-bind="text: userSuggestion.isModified"></div> -->
 		<div class="form-group">
 			<input type="submit" data-bind="click: doSubmit" value="Submit" class="btn btn-primary" formnovalidate></input>
 		</div>

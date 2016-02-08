@@ -27,9 +27,17 @@
   "description": "",
   "main": "",
   "moduleType": [],
-  "homepage": "",
+  "homepage": "https://github.com/Infro/CommonSPA",
   "private": true,
   "resolutions": {
     "knockout": ">=2.2.0"
-  }
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/bower_modules",
+    "test",
+    "tests"
+  ]
 }

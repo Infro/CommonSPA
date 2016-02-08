@@ -1,6 +1,7 @@
 define([
 'jquery', 'knockout', './router',
-'./preload', 'bootstrap', 'knockout-mapping', 'knockout-projections', 'knockout-validation', 'chosen', 'knockstrap'],
+'./preload', 'bootstrap', 'knockout-mapping', 'knockout-projections', 'knockout-validation', 'chosen', 'knockstrap',
+'knockout-dragdrop'],
 function ($, ko, router) {
 	(function() { //Knockout-Mapping: Set Defaults
 	ko.mapping.defaultOptions().ignore = ["validation"];
