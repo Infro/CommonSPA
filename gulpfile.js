@@ -30,7 +30,6 @@ requireJsOptimizerConfig = merge(requireJsRuntimeConfig, {
     'requireLib',
     'components/nav-bar/nav-bar',
 	'components/common/basecomponent',
-	'app/preload',
 	'components/common/preloadable',
 	'components/common/basecomponent'
   ],
