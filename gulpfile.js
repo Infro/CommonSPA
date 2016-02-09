@@ -15,7 +15,8 @@ var
   clean = require('gulp-clean'),
   replace = require('gulp-replace'),
   uglify = require('gulp-uglify'),
-  htmlreplace = require('gulp-html-replace');
+  htmlreplace = require('gulp-html-replace'),
+  rename = require('gulp-rename');
 
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require.config.js') + '; require;');
@@ -30,7 +31,7 @@ requireJsOptimizerConfig = merge(requireJsRuntimeConfig, {
     'requireLib',
     'components/nav-bar/nav-bar',
 	'components/common/basecomponent',
-	'components/common/preloadable',
+	'components/common/persistable',
 	'components/common/basecomponent',
 	'text!components/blank-page/blank-page.html'
   ],
@@ -55,14 +56,21 @@ gulp.task('js', function () {
 
 // Concatenates CSS files, rewrites relative paths to Bootstrap fonts, copies Bootstrap fonts
 gulp.task('css', function () {
-  var bowerCss = gulp.src('src/bower_modules/components-bootstrap/css/bootstrap.min.css');
-  bowerCss = bowerCss.pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/'));
-  var appCss = gulp.src('src/css/*.css');
-  var combinedCss = es.concat(bowerCss, appCss).pipe(concat('css.css'));
-  var fontFiles = gulp.src('./src/bower_modules/components-bootstrap/fonts/*', { base: './src/bower_modules/components-bootstrap/' });
-  var result = es.concat(combinedCss, fontFiles);
-  result = result.pipe(gulp.dest('./dist/'));
-  return result;
+	var bowerCss = gulp.src([
+		'src/bower_modules/components-bootstrap/css/bootstrap.min.css',
+		'src/bower_modules/toastr/toastr.css',
+		'src/bower_modules/chosen/chosen.min.css'
+	]);
+	bowerCss = bowerCss.pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/'));
+	bowerCss = bowerCss.pipe(replace(/url\((')?chosen-sprite/g, 'url($1images/chosen-sprite'));
+	var appCss = gulp.src('src/css/*.css');
+	var combinedCss = es.concat(bowerCss, appCss).pipe(concat('css.css'));
+	var fontFiles = gulp.src('./src/bower_modules/components-bootstrap/fonts/*', { base: './src/bower_modules/components-bootstrap/' });
+	var imageFiles = gulp.src('./src/bower_modules/chosen/*.png');
+	imageFiles = imageFiles.pipe(rename(function (path) { path.dirname += "/images";}));
+	var result = es.concat(combinedCss, fontFiles, imageFiles);
+	result = result.pipe(gulp.dest('./dist/'));
+	return result;
 });
 
 // Copies index.html, replacing <script> and <link> tags to reference production URLs

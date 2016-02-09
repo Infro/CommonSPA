@@ -10,6 +10,7 @@ function($, ko, homeTemplate, Persistable, Base, toastr) {
 	function HomeViewModel() {
 		Base.call(this);
 		this.userSuggestion = ko.observable('').extend({
+			validatable: true,
 			required: true,
 			minLength: 8,
 			maxLength: 4096

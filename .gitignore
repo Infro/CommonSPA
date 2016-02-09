@@ -5,3 +5,6 @@ src/node_modules/
 
 # Don't track build output
 dist/
+
+# Don't track temporary files
+*.~vsdx
