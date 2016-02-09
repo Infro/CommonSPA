@@ -21,13 +21,23 @@ define(["underscore"], function (_) {
 					}
 				}
 				else if (_.isObject(recursiveStructure)) {
-					addObject(getObject(recursiveStructure));
+					result.push(getObject(recursiveStructure));
 				}
 				else throw "Invalid input detected.  Objects, nulls, and arrays of objects are the only currently supported types.";
 			};
 
-			flattenRecInternal(recursiveStructure, getObject, getChildren, result);
+			flattenRecInternal(recursiveStructure);
 			return result;
+		},
+		memberwiseEqual: function(a, b) {
+			if(a instanceof Object && b instanceof Object) {
+				for(key in a)
+					if(memberwiseEqual(a[key], b[key]))
+						return true;
+				return false;
+			}
+			else
+				return a == b;
 		}
     };
 });

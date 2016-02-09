@@ -2,6 +2,7 @@ define(['knockout', 'underscore', 'text!./nav-bar.html', 'sitemap'], function (k
 	function NavBarViewModel(params) {
 		this.sitemap = sitemap;
 		this.currentRoute = params.currentRoute;
+		this.observableToInform = params.observableToInform;
 		
 		this.isActive = function (url) {
 			//return (_s.startsWith(this.currentRoute().url, url));

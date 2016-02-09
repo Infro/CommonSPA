@@ -23,6 +23,7 @@ function ($, ko, router) {
 	
 	(function() { //Knockout: Components and Component Naming Convention
 	ko.components.register('about-page', { template: { require: 'text!components/about-page/about-page.html' } });
+	ko.components.register('blank-page', { template: { require: 'text!components/blank-page/blank-page.html' } });
 
 	var namingConventionLoader = {
 		getConfig: function(name, callback) {

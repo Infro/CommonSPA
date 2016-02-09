@@ -31,7 +31,8 @@ requireJsOptimizerConfig = merge(requireJsRuntimeConfig, {
     'components/nav-bar/nav-bar',
 	'components/common/basecomponent',
 	'components/common/preloadable',
-	'components/common/basecomponent'
+	'components/common/basecomponent',
+	'text!components/blank-page/blank-page.html'
   ],
   insertRequire: ['app/startup'],
   bundles: {

@@ -2,50 +2,69 @@
 /// <reference path="require.config.js" />
 
 define(["knockout", "crossroads", "hasher", "sitemap", "mylib"], function (ko, crossroads, hasher, sitemap, lib) {
-	var flattenSitemap = function(sitemapPages)
-	{
-		return lib.flattenRecursive(
-			sitemapPages,
-			function (object) {
-				return object;
-			},
-			function (object) {
-				return object.pages;
-			}
-		);
-	}
-
-	return new Router({
-		routes: flattenSitemap(sitemap.pages)
-	});
-	
-	// function Route(config)
-	// {
-		// return ko.utils.extend(config, {viewModel: ko.observable()})
-	// }
-
 	function Router(config) {
-		var currentRoute = this.currentRoute = ko.observable({});
-		var preloadRoute = this.preloadRoute = ko.observable({});
-		var sitemap = sitemap;
+		var componentView1 = this.componentView1 = ko.observable({});
+		var componentView2 = this.componentView2 = ko.observable({component: 'blank-page'});
+		var preloadData = this.preloadData = ko.observable();
+		var viewToggle = this.viewToggle = ko.observable(true);
+		var currentRoute = this.currentRoute = ko.pureComputed(function() { return viewToggle() ? componentView1() : componentView2(); });
+		viewToggle.toggle = function() {
+			viewToggle(!viewToggle.peek());
+		};
+		
+		preloadData.subscribe(function (data) {
+			var href = data().href;
+			var pageToPreload;
+			if (href.hash)
+			{ pageToPreload = href.hash.substr(1); }
+			else
+			{ pageToPreload = href.substr(href.indexOf('#') + 1); }
+			crossroads.parse('preload' + pageToPreload);
+		});
+		
+		var displayedView = ko.pureComputed(function() {
+			if(viewToggle())
+			{ return componentView1(); }
+			else
+			{ return componentView2(); }
+		});
 
+		var getViews = function() {
+			if(viewToggle.peek())
+				return {
+					currentView: componentView1,
+					preloadedView: componentView2
+				};
+			else
+				return {
+					currentView: componentView2,
+					preloadedView: componentView1
+				};
+		};
+		
 		ko.utils.arrayForEach(config.routes, function (route) {
 			if(route.url !== undefined) {
 				crossroads.addRoute(route.url, function (requestParams) {
-					route.params = {};
-					var extendedRoute = ko.utils.extend(route.params, requestParams)
-					currentRoute(route);
+					var views = getViews();
+
+					if(views.preloadedView.peek() == route && lib.memberwiseEqual(route.params, requestParams)) {
+					}
+					else {
+						route.params = requestParams;
+						views.preloadedView(route);
+					}
+					viewToggle.toggle();
+					views.currentView({component: 'blank-page'});
 				});
 				if(route.options && route.options.preloadable) {
 					crossroads.addRoute('preload/' + route.url, function (requestParams) {
-						// Before params can be added, needs a way to have preload to switch viewmodels between real and fake.
-						route.params = {preloading: true};
-						var extendedRoute = ko.utils.extend(route.params, requestParams)
-						preloadRoute(route);
+						route.params = requestParams;
+						getViews().preloadedView(route);
 					});
 				}
 			}
 		});
+
 		activateCrossroads();
 	}
 
@@ -55,9 +74,23 @@ define(["knockout", "crossroads", "hasher", "sitemap", "mylib"], function (ko, c
 		hasher.initialized.add(function (newHash, oldHash) {
 			//Load Initial Page
 			parseHash(newHash, oldHash);
-			crossroads.parse('preload/' + newHash);
 		});
 		hasher.changed.add(parseHash);
 		hasher.init();
 	}
+
+	var flattenedSitemap = lib.flattenRecursive(
+		sitemap.pages,
+		function (object) {
+			return object;
+		},
+		function (object) {
+			return object.pages;
+		}
+	);
+
+	return new Router({
+		routes: flattenedSitemap
+	});
+	
 });

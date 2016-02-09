@@ -16,8 +16,14 @@
     <!-- endbuild -->
   </head>
   <body>
-    <div id="nav-bar" data-bind="component: { name: 'nav-bar', params: {currentRoute: currentRoute} }"></div>
-	<div id="page" class="container" data-bind="component: { name: currentRoute().component, params: currentRoute }"></div>
-    <div id="preload" style="display:none" data-bind="component: { name: preloadRoute().component, params: preloadRoute }"></div>
+    <div id="nav-bar" data-bind="component: { name: 'nav-bar', params: {currentRoute: currentRoute, observableToInform: preloadData } }"></div>
+ 	<div id="page">
+		<div data-bind="visible: viewToggle">
+			<div class="container" data-bind="component: { name: componentView1().component, params: componentView1 }"></div>
+		</div>
+		<div data-bind="visible: !viewToggle()">
+			<div class="container" data-bind="component: { name: componentView2().component, params: componentView2 }"></div>
+		</div>
+	</div>
   </body>
 </html>
