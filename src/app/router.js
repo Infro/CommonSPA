@@ -1,7 +1,7 @@
 /// <reference path="../bower_modules/requirejs/require.js" />
 /// <reference path="require.config.js" />
 
-define(["knockout", "crossroads", "hasher", "sitemap", "lib"], function (ko, crossroads, hasher, sitemap, lib) {
+define(["knockout", "crossroads", "lhasher", "sitemap", "mylib"], function (ko, crossroads, hasher, sitemap, lib) {
 	var flattenSitemap = function(sitemapPages)
 	{
 		return lib.flattenRecursive(

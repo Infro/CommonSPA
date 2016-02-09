@@ -1,10 +1,9 @@
 define(['knockout'], function(ko) {
-	function Preloadable(route, constructor) {
+	// Persistable
+	return function(route, constructor) {
 		if (!route.options.persistant || !route.viewModel) {
 			route.viewModel = new constructor();
 		}
 		return route.viewModel;
 	}
-	
-	return Preloadable;
 });

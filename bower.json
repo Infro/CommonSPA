@@ -11,7 +11,7 @@
     "components-bootstrap": "~3.3.6",
     "hasher": "~1.2.0",
     "knockout-projections": "~1.1.0-pre",
-    "knockout": "~3.4.0",
+    "knockout": "https://github.com/Conventionify/knockout.git#v3.5.0-pre",
     "requirejs-text": "~2.0.10",
     "requirejs": "~2.1.11",
     "rxjs": "~4.0.7",
@@ -22,7 +22,8 @@
     "knockout-dragdrop": "^2.4.4",
     "jquery": "^2.2.0",
     "knockout-validation": "^2.0.3",
-    "knockstrap": "^1.3.1"
+    "knockstrap": "^1.3.1",
+    "amd-loader": "*"
   },
   "description": "",
   "main": "",

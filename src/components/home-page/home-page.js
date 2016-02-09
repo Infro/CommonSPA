@@ -2,13 +2,13 @@ define([
 	'jquery',
 	'knockout',
 	'text!./home-page.html',
-	'components/common/preloadable',
+	'components/common/persistable',
 	'components/common/basecomponent',
 	'toastr'
 ],
-function($, ko, homeTemplate, preload, base, toastr) {
+function($, ko, homeTemplate, Persistable, Base, toastr) {
 	function HomeViewModel() {
-		base.call(this);
+		Base.call(this);
 		this.userSuggestion = ko.observable('').extend({
 			required: true,
 			minLength: 8,
@@ -16,7 +16,7 @@ function($, ko, homeTemplate, preload, base, toastr) {
 		});
 	}
 	
-	HomeViewModel.prototype = Object.create(base.prototype);
+	HomeViewModel.prototype = Object.create(Base.prototype);
 	HomeViewModel.prototype.constructor = HomeViewModel;
 
 	HomeViewModel.prototype.doSubmit = function(data, event) {
@@ -35,7 +35,7 @@ function($, ko, homeTemplate, preload, base, toastr) {
 	return {
 		viewModel: {
 			createViewModel: function(route) {
-				return preload(route, HomeViewModel);
+				return Persistable(route, HomeViewModel);
 			}
 		},
 		template: homeTemplate
