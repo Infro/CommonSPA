@@ -13,7 +13,7 @@
 			<textarea id="suggestionBox" placeholder="Leave any suggestions you have here." class="form-control" style="resize: vertical; min-height: 100px;"
 				data-bind="value: userSuggestion,
 					popover: userSuggestion.isModified() ?
-						{ content: userSuggestion.error(), trigger: 'focus', placement: 'top' } :
+						{ content: userSuggestion.error(), trigger: 'hover focus', placement: 'top' } :
 						{ trigger: 'none' }" ></textarea>
 			<span class="glyphicon form-control-feedback"
 				data-bind="css: { 'glyphicon-warning-sign': userSuggestion.isModified() && !userSuggestion.isValid(), 'glyphicon-ok': userSuggestion.isModified() && userSuggestion.isValid() }">

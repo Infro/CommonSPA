@@ -1,4 +1,4 @@
-﻿define(["jquery", "knockout", "crossroads", "hasher"], function ($, ko, crossroads, hasher) {
+﻿define(["jquery", "knockout"], function ($, ko) {
 	ko.bindingHandlers.preload = {
 		init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
 			/// Setting up options
@@ -18,7 +18,7 @@
 				throw "The boundItem or boundItem.observableToInform must be a writeable observable.";
 			}
 			
-			var updateObservable = function() { options.observableToInform(ko.util.unwrapObservable(options.preloadData)); }
+			var updateObservable = function() { options.observableToInform(ko.utils.unwrapObservable(options.preloadData)); }
 			var updateInternalObservableTrue = function () { element.preloadObservable(true); };
 			var updateInternalObservableFalse = function () { element.preloadObservable(false); };
 			var $element = $(element);
