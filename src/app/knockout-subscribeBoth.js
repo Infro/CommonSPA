@@ -8,7 +8,7 @@
 		var subscriptionDC = this.subscribe(function (newValue) {
 			callback(newValue, oldValue);
 		});
-		
+
 		//Override Dipose to call dispose on both subscriptions.
 		var originalDispose = subscriptionDC.dispose;
 		subscriptionDC.dispose = function() {

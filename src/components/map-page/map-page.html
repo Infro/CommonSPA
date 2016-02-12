@@ -1,0 +1,41 @@
+<div>
+    <fieldset>
+        <legend>Search</legend>
+		<input name="searchQuery" type="text" data-bind="value: searchParameter" />
+    </fieldset>
+    <fieldset data-bind="if: currentBusiness">
+        <legend>Editor</legend>
+		<label for="Notes"></label>
+		<input name="Notes" type="text" data-bind="value: currentBusiness().notes" />
+		
+    </fieldset>
+</div>
+<div data-bind="map: $data" style="width:500px;height:300px;">
+    <!-- <div data-bind="marker: currentLocation"></div> -->
+    <div data-bind="mapItems: businesses">
+        <div data-bind="marker: $data">
+            <div data-bind="infoWindow: { anchor: $marker, visible: infoVisible }">
+                <p data-bind="text: title"></p>
+				<button class="btn btn-success" data-bind="visible: phone, text: phone, click: call"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <span>
+        Center: [<span data-bind="text: center().lat().toFixed(4)"></span>, <span data-bind="text: center().lng().toFixed(4)"></span>]
+    </span>
+    <span>
+        Zoom: <span data-bind="text: zoom"></span>
+    </span>
+    <span data-bind="if: bounds">
+        Bounds: [<span data-bind="text: bounds().getSouthWest().lat().toFixed(4)"></span>, <span data-bind="text: bounds().getSouthWest().lng().toFixed(4)"></span>]
+        to [<span data-bind="text: bounds().getNorthEast().lat().toFixed(4)"></span>, <span data-bind="text: bounds().getNorthEast().lng().toFixed(4)"></span>]
+    </span>
+    <span data-bind="with: currentLocation">
+        <span data-bind="if: visible">
+            Current location: [<span data-bind="text: position().lat().toFixed(4)"></span>, <span data-bind="text: position().lng().toFixed(4)"></span>]
+        </span>
+        <span data-bind="ifnot: visible">Current location undefined</span>
+    </span>
+</div>
