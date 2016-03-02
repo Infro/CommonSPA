@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="col-md-12">
-		Home Page Info Here.
+		Hello and welcome to my humble abode.
 	</div>
 </div>
-<form method="post" action="api/addSuggestion" data-bind="submit: saveUserSuggestion" class="row">
+<form method="post" data-bind="submit: saveUserSuggestion, attr: {action: saveUserSuggestion.api}" class="row">
 	<div class="col-md-12">
 		<div class="form-group has-feedback"
 			data-bind="css: {
@@ -11,12 +11,17 @@
 				'has-success': userSuggestion.isModified() && userSuggestion.isValid()
 			}">
 			<textarea id="suggestionBox" placeholder="Leave any suggestions you have here." class="form-control" style="resize: vertical; min-height: 100px;"
-				data-bind="value: userSuggestion,
+				data-bind="
+					textInput: userSuggestion,
 					popover: userSuggestion.isModified() ?
 						{ content: userSuggestion.error(), trigger: 'hover focus', placement: 'top' } :
-						{ trigger: 'none' }" ></textarea>
+						{ content: null, trigger: 'hover focus' }" ></textarea>
 			<span class="glyphicon form-control-feedback"
-				data-bind="css: { 'glyphicon-warning-sign': userSuggestion.isModified() && !userSuggestion.isValid(), 'glyphicon-ok': userSuggestion.isModified() && userSuggestion.isValid() }">
+				data-bind="
+					css: {
+						'glyphicon-warning-sign': userSuggestion.isModified() && !userSuggestion.isValid(),
+						'glyphicon-ok': userSuggestion.isModified() && userSuggestion.isValid()
+					}">
 			</span>
 		</div>
 		<div class="form-group">

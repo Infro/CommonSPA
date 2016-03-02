@@ -14,7 +14,7 @@ define(['jquery', 'knockout', 'underscore', 'toastr'], function($, ko, _, toastr
 	};
 	BaseComponent.prototype.setData = function(data, mapping) {
 		mapping = mapping && this.mapping;
-		return mapping ? ko.mapping.fromJS(data, mapping, this) : ko.mapping.toJS(data, {}, this);
+		return mapping ? ko.mapping.fromJS(data, mapping, this) : ko.mapping.fromJS(data, {}, this);
 	};
 	
 	BaseComponent.prototype.getValidation = function() {
@@ -47,12 +47,12 @@ define(['jquery', 'knockout', 'underscore', 'toastr'], function($, ko, _, toastr
 				data: this.getData(options.mapping),
 				success: function(data) {
 					if(options.successMessage) {
-						toastr['success'](options.successMessage);
+						toastr.success(options.successMessage);
 					}
 					this.setData(data, options.mapping);
 				},
 				error: function() {
-					toastr['error'](options.errorMessage);
+					toastr.error(options.errorMessage);
 				},
 				completed: function() {
 					this.isSaving(false);
@@ -63,7 +63,7 @@ define(['jquery', 'knockout', 'underscore', 'toastr'], function($, ko, _, toastr
 		}
 		else if(options.validationMessage) {
 			errors.showAllMessages();
-			toastr['warning'](options.validationMessage);
+			toastr.warning(options.validationMessage);
 		}
 	};
 	

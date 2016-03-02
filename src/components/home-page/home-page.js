@@ -4,16 +4,17 @@ define([
 	'text!./home-page.html',
 	'components/common/persistable',
 	'components/common/basecomponent',
-	'toastr'
+	'toastr',
+	'webapiRoutes'
 ],
-function($, ko, homeTemplate, Persistable, Base, toastr) {
+function($, ko, homeTemplate, Persistable, Base, toastr, webapiRoutes) {
 	function HomeViewModel() {
 		Base.call(this);
 		this.userSuggestion = ko.observable('').extend({
-			validatable: true,
-			required: true,
+			// validatable: true,
 			minLength: 8,
-			maxLength: 4096
+			maxLength: 4096,
+			required: true
 		});
 	}
 	
@@ -32,6 +33,8 @@ function($, ko, homeTemplate, Persistable, Base, toastr) {
 			// validationMessage: "Your entry has errors.  Please correct and try again."
 		});
 	};
+	
+	HomeViewModel.prototype.saveUserSuggestion.api = webapiRoutes.saveUserSuggestion;
 
 	return {
 		viewModel: {

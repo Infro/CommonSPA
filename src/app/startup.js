@@ -1,15 +1,15 @@
 define([
 'jquery', 'knockout', './router',
 './knockout-preload', 'bootstrap', 'knockout-mapping', 'knockout-projections', 'knockout-validation', 'chosen', 'knockstrap',
-'knockout-dragdrop', 'knockout.merge'],
+'knockout-dragdrop'],
 function ($, ko, router) {
 	//https://github.com/knockout/knockout/wiki/plugins
 	(function() { //Knockout-Mapping: Set Defaults
 	ko.mapping.defaultOptions().ignore = ["validation"];
 	ko.mapping.defaultOptions().id =  {
 		key: function(data) {
-            return ko.utils.unwrapObservable(data.id);
-        }
+			return ko.utils.unwrapObservable(data.id);
+		}
 	};
 	})();
 	

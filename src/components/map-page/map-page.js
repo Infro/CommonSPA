@@ -6,7 +6,7 @@ define([
 	'components/common/persistable',
 	'components/common/basecomponent',
 	'toastr',
-	'knockout-google.maps',
+	'knockout.google.maps',
 	'googlemaps'
 ],
 function($, _, ko, mapTemplate, Persistable, Base, toastr) {
@@ -37,7 +37,7 @@ function($, _, ko, mapTemplate, Persistable, Base, toastr) {
 		this.latitude = ko.observable();
 		this.longitude = ko.observable();
 		
-		this.center = ko.pureComputed(getPosition(this.latitude, this.longitude);
+		this.center = ko.pureComputed(getPosition(this.latitude, this.longitude));
 		this.zoom = ko.observable(8);
 		this.panCenter = ko.observable(true);
 		this.bounds = ko.observable();
@@ -79,7 +79,7 @@ function($, _, ko, mapTemplate, Persistable, Base, toastr) {
 		this.infoVisible = ko.observable(false);
 		this.clickable = true;
 		
-		this.position = ko.pureComputed(getPosition(latitude, longitude);
+		this.position = ko.pureComputed(getPosition(latitude, longitude));
 	}
 	BusinessViewModel.prototype.click = function() {
 		this.infoVisible(!this.infoVisible());

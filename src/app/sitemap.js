@@ -27,5 +27,10 @@
 		"url": "contact",
 		"component": "contact-page",
 		"options": { "preloadable": "true" }
+	}, {
+		"title": "Resume",
+		"url": "resume",
+		"component": "resume-page",
+		"options": { "preloadable": "true" }
 	}]
 });

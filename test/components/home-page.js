@@ -1,3 +1,6 @@
+define('/webapiRoutes', [], {
+	saveUserSuggestion: 'api/saveUserSuggestion'
+});
 define(['components/home-page/home-page', 'knockout', 'knockout-validation'], function(homePage) {
     var HomePageViewModel = homePage.viewModel.createViewModel;
 	
@@ -19,6 +22,10 @@ define(['components/home-page/home-page', 'knockout', 'knockout-validation'], fu
 			var instance = HomePageViewModel(someObject);
 			var differentInstance = HomePageViewModel(someObject);
 			expect(differentInstance).toEqual(instance);
+		});
+		
+		it("should fail", function() {
+			expect(false).toEqual(true);
 		});
 	});
 });

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C4C76E7-C96A-422B-976E-C443293D9921}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ClassLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <CompileDependsOn>
+      $(CompileDependsOn);
+      GulpBuild;
+    </CompileDependsOn>
+    <CleanDependsOn>
+      $(CleanDependsOn);
+      GulpClean
+    </CleanDependsOn>
+    <CopyAllFilesToSingleFolderForPackageDependsOn>
+      $(CopyAllFilesToSingleFolderForPackageDependsOn);
+      CollectGulpOutput;
+    </CopyAllFilesToSingleFolderForPackageDependsOn>
+    <CopyAllFilesToSingleFolderForMsdeployDependsOn>
+      $(CopyAllFilesToSingleFolderForMsdeployDependsOn);
+      CollectGulpOutput;
+    </CopyAllFilesToSingleFolderForMsdeployDependsOn>
+  </PropertyGroup>
+  <Target Name="GulpBuild" DependsOnTargets="CompileTypeScript">
+    <Exec Command="npm install" />
+    <Exec Command="gulp build --$(ConfigurationName)" />
+  </Target>
+  <Target Name="GulpClean">
+    <Exec Command="gulp clean" />
+  </Target>
+  <Target Name="CollectGulpOutput">
+    <ItemGroup>
+      <_CustomFiles Include="wwwroot\**\*" />
+      <FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
+        <DestinationRelativePath>build\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+      </FilesForPackagingFromProject>
+    </ItemGroup>
+    <Message Text="CollectGulpOutput list: %(_CustomFiles.Identity)" />
+  </Target>
+  <PropertyGroup>
+    <RootNamespace>CommonSPA</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".bowerrc" />
+    <None Include="bower.json" />
+    <None Include="Overview.vsdx" />
+    <None Include="package.json" />
+    <None Include="src\css\theme.less" />
+    <None Include="test\.bowerrc" />
+    <None Include="test\bower.json" />
+    <None Include=".gitignore" />
+    <None Include="gulpfile.js" />
+    <None Include="karma.conf.js" />
+    <None Include="Readme.txt" />
+    <None Include="src\app\extentions\jquery.fontselect.js" />
+    <None Include="src\app\extentions\knockout.binders.element.js" />
+    <None Include="src\app\extentions\knockout.extenders.numeric.js" />
+    <None Include="src\app\knockout-preload.js" />
+    <None Include="src\app\knockout-subscribeBoth.js" />
+    <None Include="src\app\mylib.js" />
+    <None Include="src\app\require.config.js" />
+    <None Include="src\app\router.js" />
+    <None Include="src\app\sitemap.js" />
+    <None Include="src\app\startup.js" />
+    <None Include="src\components\about-page\about-page.html" />
+    <None Include="src\components\blank-page\blank-page.html" />
+    <None Include="src\components\common\basecomponent.js" />
+    <None Include="src\components\common\persistable.js" />
+    <None Include="src\components\contact-page\contact-page.html" />
+    <None Include="src\components\contact-page\contact-page.js" />
+    <None Include="src\components\home-page\home-page.html" />
+    <None Include="src\components\home-page\home-page.js" />
+    <None Include="src\components\map-page\map-page.html" />
+    <None Include="src\components\map-page\map-page.js" />
+    <None Include="src\components\nav-bar\nav-bar.html" />
+    <None Include="src\components\nav-bar\nav-bar.js" />
+    <None Include="src\components\resume-page\resume-page.html" />
+    <None Include="src\components\resume-page\resume-page.js" />
+    <None Include="src\components\services-page\services-page.html" />
+    <None Include="src\components\services-page\services-page.js" />
+    <None Include="src\components\software-page\software-page.html" />
+    <None Include="src\components\software-page\software-page.js" />
+    <None Include="src\css\styles.css" />
+    <None Include="src\index.html" />
+    <None Include="test\components\home-page.js" />
+    <None Include="test\index.html" />
+    <None Include="test\require.config.js" />
+    <None Include="test\SpecRunner.browser.js" />
+    <None Include="test\SpecRunner.karma.js" />
+    <!--<None Exclude="wwwroot\**\*.*" />
+    <None Exclude="test\bower_modules\**\*.*" />
+    <None Exclude="node_modules\**\*.*" />
+    <None Exclude="src\bower_modules\**\*.*" />-->
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\other_modules\knockout.google.maps\.git\objects\info\" />
+    <Folder Include="src\other_modules\knockout.google.maps\.git\refs\tags\" />
+    <Folder Include="src\other_modules\knockout.merge\.git\objects\info\" />
+    <Folder Include="src\other_modules\knockout.merge\.git\refs\tags\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
