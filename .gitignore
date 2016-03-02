@@ -8,6 +8,7 @@ test/bower_modules/
 dist/
 wwwroot/
 obj/
+bin/
 
 # Don't track temporary files
 *.~vsdx
