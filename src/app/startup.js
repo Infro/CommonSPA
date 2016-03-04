@@ -1,6 +1,6 @@
 define([
 'jquery', 'knockout', './router',
-'./knockout-preload', 'bootstrap', 'knockout-mapping', 'knockout-projections', 'knockout-validation', 'chosen', 'knockstrap',
+'./extentions/knockout.binders.preload', 'bootstrap', 'knockout-mapping', 'knockout-projections', 'knockout-validation', 'chosen', 'knockstrap',
 'knockout-dragdrop'],
 function ($, ko, router) {
 	//https://github.com/knockout/knockout/wiki/plugins

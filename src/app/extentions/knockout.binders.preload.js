@@ -1,4 +1,4 @@
-﻿define(["jquery", "knockout"], function ($, ko) {
+define(["jquery", "knockout"], function ($, ko) {
     ko.bindingHandlers.preload = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             /// Setting up options

@@ -1,4 +1,4 @@
-﻿define(["knockout"], function (ko) {
+define(["knockout"], function (ko) {
 	ko.subscribable.fn.subscribeBoth = function (callback) {
 		var oldValue;
 		var subscriptionBC = this.subscribe(function (_oldValue) {

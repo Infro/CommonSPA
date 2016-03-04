@@ -1,7 +1,7 @@
 /// <reference path="../bower_modules/requirejs/require.js" />
 /// <reference path="require.config.js" />
 
-define(["knockout", "crossroads", "hasher", "sitemap", "mylib", "./knockout-subscribeBoth"], function (ko, crossroads, hasher, sitemap, lib) {
+define(["knockout", "crossroads", "hasher", "sitemap", "mylib", "./extentions/knockout.subscribable.subscribeboth"], function (ko, crossroads, hasher, sitemap, lib) {
 	function Router(config) {
 		var componentView1 = this.componentView1 = ko.observable({component: 'blank-page'});
 		var componentView2 = this.componentView2 = ko.observable({component: 'blank-page'});

@@ -15,7 +15,7 @@ define(["underscore"], function (_) {
 		}
 		else if (_.isObject(recursiveStructure)) {
 			var children = getChildren(recursiveStructure);
-			if (children != undefined) { recurseStructure(children, getChildren); }
+			if (children !== undefined) { recurseStructure(children, getChildren); }
 		}
 		else throw "Invalid input detected.  Objects, arrays of objects, and nulls are the only currently supported types.";
 	};

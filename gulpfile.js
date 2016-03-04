@@ -16,7 +16,7 @@ var
 	rename = require('gulp-rename'),
 	plumber = require('gulp-plumber'),
 	browserSync = require('browser-sync'),
-	ignore = require('gulp-ignore'),
+	filter = require('gulp-ignore'),
 	debug = require('gulp-debug');
 
 // HTML Plugins
@@ -72,7 +72,7 @@ gulp.task('js', function () {
         name: 'app/startup',
         paths: {
             requireLib: 'bower_modules/requirejs/require',
-            webapiRoutes: 'empty:'
+            googlemaps: 'empty:'
         },
         include: [
             'requireLib',
@@ -95,29 +95,35 @@ gulp.task('js', function () {
         onBuildRead: function (moduleName, path, contents) { alljsfiles.push(path); return contents; }
     });
 
-	var thePromise = new Promise(function (resolve, reject) {
-	    rjs(requireJsOptimizerConfig)
-            //.pipe(plumber({
-            //    errorHandler: function (error) {
-            //        console.log(error.message);
-            //        this.emit('end');
-            //    }
-            //}))
-            .on('error', reject)
-            .pipe(gulpif(!argv.Debug, uglify({ preserveComments: 'some' })))
-            .on('end', function () { console.log('Finished requireJs')})
-            .pipe(gulp.dest(output))
-            .on('end', function () {
-                alljsfiles.push('!src/bower_modules/**');
-                var hintedFiles = gulp.src(alljsfiles)
-                    .pipe(ignore('src/bower_modules/'))
-                    .pipe(jshint())
-                    .pipe(jshint.reporter(require('jshint-stylish')))
-                    .on('end', resolve);
-            })
-            .pipe(browserSync.reload({ stream: true }));
-	});
-	return thePromise;
+    var promise2,promise1 = new Promise(function (resolve1, reject) { promise2 = new Promise(function (resolve2, reject) {
+        rjs(requireJsOptimizerConfig)
+        //.pipe(plumber({
+        //    errorHandler: function (error) {
+        //        console.log(error.message);
+        //        this.emit('end');
+        //    }
+        //}))
+        .on('error', reject)
+        .pipe(gulpif(!argv.Debug, uglify({ preserveComments: 'some' })))
+        .on('end', function () {
+            alljsfiles.push('!src/bower_modules/**');
+            console.log(alljsfiles.reduce(function (a, b) { return a + ',' + b; }));
+            gulp.src(alljsfiles)
+                //.pipe(filter.exclude('src/bower_modules/'))
+                .pipe(jshint())
+                .pipe(jshint.reporter(require('jshint-stylish')))
+                .on('end', resolve1);
+        })
+        //.pipe(debug())
+        //.pipe(filter.exclude(requireJsOptimizerConfig.out))
+        //.pipe(jshint())
+        //.pipe(jshint.reporter(require('jshint-stylish')))
+        //.pipe(srcadd(requireJsOptimizerConfig.out))
+        .pipe(gulp.dest(output))
+        .pipe(browserSync.reload({ stream: true }))
+        .on('end', resolve2);
+    })});
+    return Promise.all([promise1, promise2]);
 });
 
 // Concatenates CSS files, rewrites relative paths to Bootstrap fonts, copies Bootstrap fonts

@@ -28,40 +28,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <CompileDependsOn>
-      $(CompileDependsOn);
-      GulpBuild;
-    </CompileDependsOn>
-    <CleanDependsOn>
-      $(CleanDependsOn);
-      GulpClean
-    </CleanDependsOn>
-    <CopyAllFilesToSingleFolderForPackageDependsOn>
-      $(CopyAllFilesToSingleFolderForPackageDependsOn);
-      CollectGulpOutput;
-    </CopyAllFilesToSingleFolderForPackageDependsOn>
-    <CopyAllFilesToSingleFolderForMsdeployDependsOn>
-      $(CopyAllFilesToSingleFolderForMsdeployDependsOn);
-      CollectGulpOutput;
-    </CopyAllFilesToSingleFolderForMsdeployDependsOn>
-  </PropertyGroup>
-  <Target Name="GulpBuild" DependsOnTargets="CompileTypeScript">
-    <Exec Command="npm install" />
-    <Exec Command="gulp build --$(ConfigurationName)" />
-  </Target>
-  <Target Name="GulpClean">
-    <Exec Command="gulp clean" />
-  </Target>
-  <Target Name="CollectGulpOutput">
-    <ItemGroup>
-      <_CustomFiles Include="wwwroot\**\*" />
-      <FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
-        <DestinationRelativePath>build\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
-      </FilesForPackagingFromProject>
-    </ItemGroup>
-    <Message Text="CollectGulpOutput list: %(_CustomFiles.Identity)" />
-  </Target>
-  <PropertyGroup>
     <RootNamespace>CommonSPA</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
@@ -79,13 +45,14 @@
     <None Include="src\app\extentions\jquery.fontselect.js" />
     <None Include="src\app\extentions\knockout.binders.element.js" />
     <None Include="src\app\extentions\knockout.extenders.numeric.js" />
-    <None Include="src\app\knockout-preload.js" />
-    <None Include="src\app\knockout-subscribeBoth.js" />
+    <None Include="src\app\extentions\knockout.binders.preload.js" />
+    <None Include="src\app\extentions\knockout.subscribable.subscribeBoth.js" />
     <None Include="src\app\mylib.js" />
     <None Include="src\app\require.config.js" />
     <None Include="src\app\router.js" />
     <None Include="src\app\sitemap.js" />
     <None Include="src\app\startup.js" />
+    <None Include="src\app\api.js" />
     <None Include="src\components\about-page\about-page.html" />
     <None Include="src\components\blank-page\blank-page.html" />
     <None Include="src\components\common\basecomponent.js" />
@@ -116,14 +83,9 @@
     <None Exclude="node_modules\**\*.*" />
     <None Exclude="src\bower_modules\**\*.*" />-->
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\other_modules\knockout.google.maps\.git\objects\info\" />
-    <Folder Include="src\other_modules\knockout.google.maps\.git\refs\tags\" />
-    <Folder Include="src\other_modules\knockout.merge\.git\objects\info\" />
-    <Folder Include="src\other_modules\knockout.merge\.git\refs\tags\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
+  <Import Project="$(MSBuildToolsPath)\Custom.Node.Targets" />
 </Project>

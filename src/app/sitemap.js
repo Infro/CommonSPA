@@ -1,4 +1,4 @@
-﻿define({
+define({
 	"pages": [{
 		"url": "",
 		"title": "Home",

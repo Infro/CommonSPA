@@ -7,25 +7,25 @@
 	<div class="col-md-12">
 		<div class="form-group has-feedback"
 			data-bind="css: {
-				'has-warning': userSuggestion.isModified() && !userSuggestion.isValid(),
-				'has-success': userSuggestion.isModified() && userSuggestion.isValid()
+				'has-warning': message.isModified() && !message.isValid(),
+				'has-success': message.isModified() && message.isValid()
 			}">
 			<textarea id="suggestionBox" placeholder="Leave any suggestions you have here." class="form-control" style="resize: vertical; min-height: 100px;"
 				data-bind="
-					textInput: userSuggestion,
-					popover: userSuggestion.isModified() ?
-						{ content: userSuggestion.error(), trigger: 'hover focus', placement: 'top' } :
+					textInput: message,
+					popover: message.isModified() ?
+						{ content: message.error(), trigger: 'hover focus', placement: 'top' } :
 						{ content: null, trigger: 'hover focus' }" ></textarea>
 			<span class="glyphicon form-control-feedback"
 				data-bind="
 					css: {
-						'glyphicon-warning-sign': userSuggestion.isModified() && !userSuggestion.isValid(),
-						'glyphicon-ok': userSuggestion.isModified() && userSuggestion.isValid()
+						'glyphicon-warning-sign': message.isModified() && !message.isValid(),
+						'glyphicon-ok': message.isModified() && message.isValid()
 					}">
 			</span>
 		</div>
 		<div class="form-group">
-			<input type="submit" data-bind="click: doSubmit" value="Submit" class="btn btn-primary" formnovalidate></input>
+			<input type="submit" data-bind="click: doSubmit, disabled: isSaving" value="Submit" class="btn btn-primary" formnovalidate></input>
 		</div>
 	</div>
 </form>

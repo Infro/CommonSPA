@@ -43,7 +43,7 @@ define(['jquery', 'knockout', 'underscore', 'toastr'], function($, ko, _, toastr
 		
 		var errors = this.getValidation();
 		if(errors().length === 0) {
-			_.extend(options, {
+		    var mergedOptions = _.extend({}, options, {
 				data: this.getData(options.mapping),
 				success: function(data) {
 					if(options.successMessage) {
@@ -52,14 +52,14 @@ define(['jquery', 'knockout', 'underscore', 'toastr'], function($, ko, _, toastr
 					this.setData(data, options.mapping);
 				},
 				error: function() {
-					toastr.error(options.errorMessage);
+				    toastr.error(options.errorMessage);
 				},
 				completed: function() {
 					this.isSaving(false);
 				}
 			});
 			this.isSaving(true);
-			$.post(options);
+			$.post(mergedOptions);
 		}
 		else if(options.validationMessage) {
 			errors.showAllMessages();

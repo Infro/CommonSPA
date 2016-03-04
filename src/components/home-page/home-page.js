@@ -5,12 +5,12 @@ define([
 	'components/common/persistable',
 	'components/common/basecomponent',
 	'toastr',
-	'webapiRoutes'
+	'api'
 ],
-function($, ko, homeTemplate, Persistable, Base, toastr, webapiRoutes) {
+function($, ko, homeTemplate, Persistable, Base, toastr, api) {
 	function HomeViewModel() {
 		Base.call(this);
-		this.userSuggestion = ko.observable('').extend({
+		this.message = ko.observable('').extend({
 			// validatable: true,
 			minLength: 8,
 			maxLength: 4096,
@@ -34,7 +34,7 @@ function($, ko, homeTemplate, Persistable, Base, toastr, webapiRoutes) {
 		});
 	};
 	
-	HomeViewModel.prototype.saveUserSuggestion.api = webapiRoutes.saveUserSuggestion;
+	HomeViewModel.prototype.saveUserSuggestion.api = api.saveUserSuggestion;
 
 	return {
 		viewModel: {

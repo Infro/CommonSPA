@@ -13,17 +13,17 @@ function($, _, ko, mapTemplate, Persistable, Base, toastr) {
 	var searchUrl;
 	var callingUrl;
 	
-	var getPosition = function(latitude, longitude) {
-		return {
-			read: function () {
-				return new google.maps.LatLng(latitude(), longitude());
-			},
-			write: function (value) {
-				latitude(value.lat());
-				longitude(value.lng());
-			}
-		};
-	}
+	var getPosition = function (latitude, longitude) {
+	    return {
+	        read: function () {
+	            return new google.maps.LatLng(latitude(), longitude());
+	        },
+	        write: function (value) {
+	            latitude(value.lat());
+	            longitude(value.lng());
+	        }
+	    };
+	};
 	
 	function MapViewModel() {
 		Base.call(this);
@@ -48,18 +48,19 @@ function($, _, ko, mapTemplate, Persistable, Base, toastr) {
 	MapViewModel.prototype = Object.create(Base.prototype);
 	MapViewModel.prototype.constructor = MapViewModel;
 	MapViewModel.prototype.handleSearch = function(newValue) {
-		self.currentBusiness(null);
-		self.businesses.removeAll() 
 		$.get({
 			url: searchUrl,
 			data: {query: newValue},
-			success: function(data) {
+			success: function (data) {
+			    self.currentBusiness(null);
+			    self.businesses.removeAll();
 				var newBounds = new google.maps.LatLngBounds();
-				ko.utils.arrayPushAll(self.businesses, _.map(data, function(business) {
-					var businessViewModel = new BusinessViewModel();
-					ko.merge.fromJS(businessViewModel, business);
-					return businessViewModel;
+				ko.utils.arrayPushAll(self.businesses, _.map(data, function (business) {
+				    var businessViewModel = new BusinessViewModel();
+                    // TODO: Check that this is valid merging and not replacement.
+					ko.mapping.fromJS(businessViewModel, business);
 					newBounds.expand(businessViewModel.position());
+					return businessViewModel;
 				}));
 				self.businesses.valueHasMutated();
 				self.bounds(bounds);
